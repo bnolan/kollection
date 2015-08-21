@@ -47,7 +47,7 @@ function Collection (Model, input, filter) {
   this.count = function () {
     return list.length;
   };
-};
+}
 
 util.inherits(Collection, Stream);
 
