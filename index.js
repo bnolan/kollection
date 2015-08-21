@@ -2,18 +2,6 @@ var Stream = require('stream');
 var util = require('util');
 var split = require('split');
 
-// function LocalStorageStream (localStorage) {
-//   var self = this;
-
-//   stream.Stream.call(this)
-
-//   Object.keys(localStorage).forEach(function () {
-//     self.
-//   });
-// }
-
-// util.inherits(LocalStorageStream, stream.Stream)
-
 function Collection (Model, input, filter) {
   var self = this;
   var list = [];
