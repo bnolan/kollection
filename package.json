@@ -1,0 +1,18 @@
+{
+  "name": "kollection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js && semistandard"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tape": "^4.2.0"
+  },
+  "dependencies": {
+    "split": "^1.0.0",
+    "util-extend": "^1.0.1"
+  }
+}
