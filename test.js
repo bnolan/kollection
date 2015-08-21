@@ -60,3 +60,15 @@ test('filtering', function (t) {
 
   t.end();
 });
+
+test('add event', function (t) {
+  var c1 = new Collection(Model);
+  var c2 = new Collection(Model, c1);
+
+  c2.on('add', function (element) {
+    t.ok(element);
+    t.end();
+  });
+
+  c1.add(new Model({ name: 'bono' }));
+});

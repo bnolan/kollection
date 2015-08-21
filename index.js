@@ -22,11 +22,12 @@ function Collection (Model, input, filter) {
   this.readable = true;
 
   if (input) {
-    (input instanceof Collection ? input.rewind() : input).pipe(split(JSON.parse)).on('data', function (json) {
+    ((input instanceof Collection && !input.empty()) ? input.rewind() : input).pipe(split(JSON.parse)).on('data', function (json) {
       var m = new Model(json);
 
       if (!filter || (filter(m))) {
         list.push(m);
+        self.emit('add', m);
       }
     });
   }
@@ -45,6 +46,10 @@ function Collection (Model, input, filter) {
     }, 0);
 
     return result;
+  };
+
+  this.empty = function () {
+    return list.length === 0;
   };
 
   this.add = function (element) {
