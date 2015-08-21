@@ -33,6 +33,18 @@ test('input', function (t) {
   t.end();
 });
 
+test('create view later', function (t) {
+  var c1 = new Collection(Model);
+  c1.add(new Model({ name: 'bozo' }));
+
+  var c2 = new Collection(Model, c1);
+  setTimeout(function () {
+    t.equal(c2.count(), 1);
+  }, 10);
+
+  t.end();
+});
+
 test('filtering', function (t) {
   var c1 = new Collection(Model);
   var c2 = new Collection(Model, c1, function (model) {

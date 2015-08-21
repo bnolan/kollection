@@ -22,7 +22,7 @@ function Collection (Model, input, filter) {
   this.readable = true;
 
   if (input) {
-    input.pipe(split(JSON.parse)).on('data', function (json) {
+    (input instanceof Collection ? input.rewind() : input).pipe(split(JSON.parse)).on('data', function (json) {
       var m = new Model(json);
 
       if (!filter || (filter(m))) {
@@ -30,6 +30,22 @@ function Collection (Model, input, filter) {
       }
     });
   }
+
+  this.rewind = function () {
+    var result = new Stream();
+
+    self.on('data', function (data) {
+      result.emit('data', data);
+    });
+
+    setTimeout(function () {
+      list.forEach(function (element) {
+        result.emit('data', JSON.stringify(element) + '\n');
+      });
+    }, 0);
+
+    return result;
+  };
 
   this.add = function (element) {
     list.push(element);
